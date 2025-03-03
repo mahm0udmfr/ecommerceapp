@@ -4,10 +4,8 @@ import 'package:ecommerceapp/core/utils/app_assets.dart';
 import 'package:ecommerceapp/core/utils/app_styles.dart';
 import 'package:ecommerceapp/core/utils/colors.dart';
 import 'package:ecommerceapp/features/ui/main/home_tab/cubit/home_tab_states.dart';
-
 import 'package:ecommerceapp/features/ui/main/home_tab/cubit/home_tab_view_model.dart';
 import 'package:ecommerceapp/features/ui/main/home_tab/widgets/custom_category_widget.dart';
-import 'package:ecommerceapp/features/ui/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,30 +23,6 @@ class HomeTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: CustomTextFormField(
-                      borderColor: AppColors.primaryColor,
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: AppColors.primaryColor,
-                        size: 24.sp,
-                      ),
-                      isPassword: false,
-                      keyboardType: TextInputType.emailAddress,
-                      obscureText: false,
-                      filledColor: AppColors.whiteColor,
-                      hintText: "What do you search for?",
-                      hintStyle: AppStyles.light18HintText,
-                    ),
-                  ),
-                  IconButton(
-                      onPressed: () {},
-                      icon: Image.asset(AppAssets.shoppingCart))
-                ],
-              ),
               CarouselSlider(
                   items: [
                     Image.asset(AppAssets.slider1),

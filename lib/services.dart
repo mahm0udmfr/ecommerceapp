@@ -30,6 +30,10 @@ class MyServices {
     return prefs.getString(key);
   }
 
+  static Future remove(String key) async{
+    return await prefs.remove(key);
+  }
+
   static Future<void> clear() async {
     await prefs.clear();
   }

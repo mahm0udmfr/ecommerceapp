@@ -2,6 +2,8 @@ import 'package:ecommerceapp/core/di/di.dart';
 import 'package:ecommerceapp/core/utils/app_routes.dart';
 import 'package:ecommerceapp/core/utils/my_bloc_observer.dart';
 import 'package:ecommerceapp/features/ui/auth/register/register_screen.dart';
+import 'package:ecommerceapp/features/ui/main/products_tab/cubit/product_tab_view_model.dart';
+import 'package:ecommerceapp/features/ui/pages/cart_screen/cubit/cart_view_model.dart';
 import 'package:ecommerceapp/services.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerceapp/features/ui/homeScreen/home_screen.dart';
@@ -16,7 +18,10 @@ void main() async {
   configureDependencies();
   Bloc.observer = MyBlocObserver();
   await MyServices.init();
-  runApp(const MyApp());
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(create: (context) => getIt<ProductTabViewModel>()),
+    BlocProvider(create: (context) => getIt<CartViewModel>())
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -38,7 +43,9 @@ class MyApp extends StatelessWidget {
               AppRoutes.loginRoute: (context) => LoginScreen(),
               AppRoutes.registerRoute: (context) => RegisterScreen(),
             },
-            initialRoute: AppRoutes.loginRoute);
+            initialRoute: MyServices.getString("token") == null
+                ? AppRoutes.loginRoute
+                : AppRoutes.homeRoute);
       },
     );
   }

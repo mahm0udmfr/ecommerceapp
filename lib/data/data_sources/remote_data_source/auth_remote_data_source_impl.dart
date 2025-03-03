@@ -6,6 +6,7 @@ import 'package:ecommerceapp/core/errors/faliurs.dart';
 import 'package:ecommerceapp/data/model/login_response_dm.dart';
 import 'package:ecommerceapp/data/model/register_response_dm.dart';
 import 'package:ecommerceapp/domain/reposatries/data_sources/remote_data_source/auth_remote_data_source.dart';
+import 'package:ecommerceapp/services.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: AuthRemoteDataSource)
@@ -57,6 +58,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         });
         var loginResponse = LoginResponseDm.fromJson(response.data);
         if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          MyServices.setString("token", loginResponse.token!);
           return Right(loginResponse);
         } else {
           return left(ServerFaliure(errorMessage: loginResponse.message!));

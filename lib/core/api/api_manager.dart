@@ -6,29 +6,49 @@ import 'package:injectable/injectable.dart';
 class ApiManager {
   final dio = Dio();
 
-  Future<Response> getData({
-    required String endPoint,
-    Map<String, dynamic>? queryParameters,
-    Options? options,
-  }) {
+  Future<Response> getData(
+      {required String endPoint,
+      Map<String, dynamic>? queryParameters,
+      Options? options,
+      Map<String, dynamic>? headers}) {
     return dio.get(ApiConstant.baseUrl + endPoint,
         queryParameters: queryParameters,
-        options: Options(
-          validateStatus: (status) => true,
-        ));
+        options: Options(validateStatus: (status) => true, headers: headers));
   }
 
-  Future<Response> postData({
-    required String endPoint,
-    Map<String, dynamic>? queryParameters,
-    Options? options,
-    Object? body,
-  }) {
+  Future<Response> postData(
+      {required String endPoint,
+      Map<String, dynamic>? queryParameters,
+      Options? options,
+      Object? body,
+      Map<String, dynamic>? headers}) {
     return dio.post(ApiConstant.baseUrl + endPoint,
         queryParameters: queryParameters,
-        options: Options(
-          validateStatus: (status) => true,
-        ),
+        options: Options(validateStatus: (status) => true, headers: headers),
+        data: body);
+  }
+
+    Future<Response> deleteData(
+      {required String endPoint,
+      Map<String, dynamic>? queryParameters,
+      Options? options,
+      Object? body,
+      Map<String, dynamic>? headers}) {
+    return dio.delete(ApiConstant.baseUrl + endPoint,
+        queryParameters: queryParameters,
+        options: Options(validateStatus: (status) => true, headers: headers),
+        data: body);
+  }
+
+      Future<Response> updateData(
+      {required String endPoint,
+      Map<String, dynamic>? queryParameters,
+      Options? options,
+      Object? body,
+      Map<String, dynamic>? headers}) {
+    return dio.put(ApiConstant.baseUrl + endPoint,
+        queryParameters: queryParameters,
+        options: Options(validateStatus: (status) => true, headers: headers),
         data: body);
   }
 }
