@@ -3,7 +3,9 @@ import 'package:ecommerceapp/core/utils/app_routes.dart';
 import 'package:ecommerceapp/core/utils/my_bloc_observer.dart';
 import 'package:ecommerceapp/features/ui/auth/register/register_screen.dart';
 import 'package:ecommerceapp/features/ui/main/products_tab/cubit/product_tab_view_model.dart';
+import 'package:ecommerceapp/features/ui/pages/cart_screen/cart_screen.dart';
 import 'package:ecommerceapp/features/ui/pages/cart_screen/cubit/cart_view_model.dart';
+import 'package:ecommerceapp/features/ui/product_details_screen/product_details_screen.dart';
 import 'package:ecommerceapp/services.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerceapp/features/ui/homeScreen/home_screen.dart';
@@ -42,6 +44,8 @@ class MyApp extends StatelessWidget {
               AppRoutes.homeRoute: (context) => HomeScreen(),
               AppRoutes.loginRoute: (context) => LoginScreen(),
               AppRoutes.registerRoute: (context) => RegisterScreen(),
+              AppRoutes.productRoute: (context) => ProductDetailsScreen(),
+                AppRoutes.cartRoute: (context) => CartScreen(),
             },
             initialRoute: MyServices.getString("token") == null
                 ? AppRoutes.loginRoute
